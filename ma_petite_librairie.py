@@ -1,11 +1,10 @@
 ﻿# -*- coding:utf-8 -*-
 
 import requests
-import json
 import os
 
 def list_ten_last_books():
-    '''Lister les 10 derniers livres par leur date de publications'''
+    '''Lister les 10 derniers livres par leurs dates de publication'''
 
     req = requests.get('https://demo.api-platform.com/books?order%5BpublicationDate%5D=desc')
     all_books = req.json()['hydra:member']
@@ -66,7 +65,7 @@ def create_comment(auteur='Romain', comment='Voila ce que je pense de ce bouquin
 
     print(f'\nL\'id de votre nouveau commentaire est : {id_review}')
 
-def edit_review(id_post, auteur='Romain', comment='mon commentaire édité'):
+def edit_review(id_post, auteur='Romain', comment='Mon commentaire édité'):
     '''Modifier votre nouveau commentaire en utilisant l’id qui vous a été fourni lors de sa création'''
 
     content_review = {'author':auteur,
@@ -80,22 +79,30 @@ def edit_review(id_post, auteur='Romain', comment='mon commentaire édité'):
 if __name__ == '__main__':
 
     while True:
-        choix = eval(input('''\n[1] Lister les 10 derniers livres par leur date de publications
+        choix = input('''\n[1] Lister les 10 derniers livres par leurs dates de publication
+
 [2] Lister le livre écrit par l’auteur « Dr. Kaitlyn Ratke »
-[3] Lister tous les commentaires du livre dont l’id est : 1d52ba85-97c8-4cc3-b81a-40582f3aff64
-[4] Créer un nouveau commentaire pour le livre dont l’id est : 1b08c9ab-6254-4015-ad14-bac3e5c008df
+
+[3] Lister tous les commentaires du livre dont l’id est :
+    1d52ba85-97c8-4cc3-b81a-40582f3aff64
+
+[4] Créer un nouveau commentaire pour le livre dont l’id est :
+    1b08c9ab-6254-4015-ad14-bac3e5c008df
+
 [5] Modifier votre nouveau commentaire
 
-Faite votre choix : '''))
+Choix : ''')
 
-        if choix == 1:
+        if choix == '1':
             list_ten_last_books()
-        elif choix == 2:
+        elif choix == '2':
             list_book_by()
-        elif choix == 3:
+        elif choix == '3':
             list_all_comments()
-        elif choix == 4:
+        elif choix == '4':
             create_comment()
-        elif choix == 5:
+        elif choix == '5':
             id_comment = input('\nEntrez l\'id du commentaire à modifier : ')
             edit_review(id_comment)
+        else:
+            print('\nChoix incorrect!')
